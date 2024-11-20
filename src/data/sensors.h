@@ -17,14 +17,16 @@
 #include "TinyGPS++.h"
 #include "adxl375.h"
 #include "data.h"
+#include "../DriverInterface.h"
 
-class Sensors {
+class Sensors : public DriverInterface {
 public:
     Sensors();
     ~Sensors();
 
     void calibrate();
     bool update();
+    void checkPolicy(DataDump dump) override;
     // inline SensStatus get_status() const { return status; }
     // inline SensRaw get_raw() const { return raw_data; }
     // inline SensFiltered get_clean() const { return clean_data; }
@@ -42,5 +44,11 @@ private:
     // Read sensors status
     void update_status();
 };
+
+struct timeCode {
+    int second;
+    int nanosecond;
+};
+
 
 #endif /* SENSORS_H */
