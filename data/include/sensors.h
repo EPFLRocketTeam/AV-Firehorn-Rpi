@@ -17,14 +17,14 @@
 #include "TinyGPS++.h"
 #include "adxl375.h"
 #include "data.h"
-
-class Sensors {
+#include "sensors_interface.h"
+class Sensors : public SensorInterface {
 public:
     Sensors();
     ~Sensors();
 
-    void calibrate();
-    bool update();
+    void calibrate() override;
+    bool update() override;
     // inline SensStatus get_status() const { return status; }
     // inline SensRaw get_raw() const { return raw_data; }
     // inline SensFiltered get_clean() const { return clean_data; }
@@ -40,7 +40,7 @@ private:
     // SensFiltered clean_data;
 
     // Read sensors status
-    void update_status();
+    void update_status() override;
 };
 
 #endif /* SENSORS_H */

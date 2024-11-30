@@ -9,9 +9,11 @@
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
-#include "../../data/include/sensors.h"
+#include "sensors.h"
 
-class MockSensor : public Sensors {
+class MockSensor : public SensorInterface {
 public:
     MOCK_METHOD(bool,update,(),(override) );
+    MOCK_METHOD(void,calibrate,(),(override) );
+    MOCK_METHOD(void,update_status,(),(override) );
 };

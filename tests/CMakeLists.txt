@@ -33,10 +33,16 @@ target_link_libraries(main_test PUBLIC
         data sensors telecom ERT_RF_Protocol_Interface
         adxl375 bmi08a bmi08g bmi08xa bmp3 I2CGPS TinyGPS++)
 
+set (MOCK_SENSOR include/MockSensor.h src/MockSensor.cpp )
+add_executable(mock_sensor ${MOCK_SENSOR})
+target_include_directories(mock_sensor PUBLIC include)
+target_link_libraries(mock_sensor sensors GTest::GTest GTest::Main GTest::gmock)
+
+
 #set(MOCK_SENSOR src/MockSensor.cpp)
 #add_library(mock_sensor ${MOCK_SENSOR})
 #target_include_directories(mock_sensor PUBLIC include)
-#find_package(GTest REQUIRED)
-#include(GoogleTest)
+find_package(GTest REQUIRED)
+include(GoogleTest)
 #include_directories(${GTEST_INCLUDE_DIRS})
 #target_link_libraries(mock_sensor PUBLIC ${GTEST_LIBRARIES} sensor adxl375 bmi08a bmi08g bmi08xa bmp3 I2CGPS TinyGPS++)
