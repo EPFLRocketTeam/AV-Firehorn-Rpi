@@ -45,6 +45,7 @@
 
 /* Header includes */
 #include "bmp3_defs.h"
+#include "bmp3_interface.h"
 #include <stdexcept>
 #include <string>
 
@@ -578,7 +579,7 @@ int8_t bmp3_i2c_deinit(uint8_t addr);
 }
 #endif /* End of CPP guard */
 
-class Bmp390 {
+class Bmp390 : public Bmp3_Interface {
 private:
     uint8_t addr;
 
@@ -591,9 +592,9 @@ public:
     
     Bmp390(uint8_t addr, uint16_t settings_sel = BMP3_SEL_PRESS_EN | BMP3_SEL_TEMP_EN |
         BMP3_SEL_PRESS_OS | BMP3_SEL_TEMP_OS | BMP3_SEL_ODR | BMP3_SEL_DRDY_EN);
-    ~Bmp390();
-    bmp3_status get_status();
-    bmp3_data get_sensor_data(uint8_t sensor_comp = BMP3_PRESS_TEMP);
+    ~Bmp390() override;
+    bmp3_status get_status() override;
+    bmp3_data get_sensor_data(uint8_t sensor_comp = BMP3_PRESS_TEMP) override; 
     /*
     * sensor_comp indicates the type of data to be read
     * BMP3_PRESS_TEMP : To read pressure and temperature data
